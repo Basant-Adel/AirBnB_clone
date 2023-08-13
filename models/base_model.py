@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 """ represents a file"""
+
 import uuid
+import models
 import datetime
+
 
 class BaseModel:
     """" a class representing a model"""
