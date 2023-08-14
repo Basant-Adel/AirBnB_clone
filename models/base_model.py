@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ represents a file"""
+
 import uuid
 import datetime
 from models import storage
@@ -7,6 +8,7 @@ from models import storage
 
 class BaseModel:
     """" a class representing a model"""
+
     def __init__(self):
         """ initializes a thing"""
         self.my_number = 0
@@ -27,10 +29,13 @@ class BaseModel:
         else:
             self.my_number = kwargs["my_number"]
             self.name = kwargs["name"]
-            self.updated_at = datetime.datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+            self.updated_at = datetime.datetime.strptime(
+                    kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
             self.id = kwargs["id"]
-            self.created_at = datetime.datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+            self.created_at = datetime.datetime.strptime(
+                    kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
         storage.new(self)
+
     def save(self):
         """ update the model """
         self.updated_at = datetime.datetime.now()
