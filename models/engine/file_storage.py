@@ -1,40 +1,54 @@
 #!/usr/bin/python3
-""" represents a file"""
+""" Represents A File """
 
-import os
 import json
+from models.base_model import BaseModel
 from models.user import User
-from models.city import City
 from models.place import Place
 from models.state import State
-from models.review import Review
+from models.city import City
 from models.amenity import Amenity
-from models.base_model import BaseModel
+from models.review import Review
 
 
 class FileStorage:
-    """" a class representing a model"""
+    """ A Class Representing A Model """
 
-    def __init__(self):
-        """ initializes a thing"""
-        self.__file_path = ""
-        self.__objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
-        """Returns the dictionary"""
-        return self.__objects
+        """ ALL Dictionary """
+
+        return FileStorage.__objects
 
     def new(self, obj):
-        """"set in object"""
-        self.__objects[obj.__class__.__name__ + "." + str(obj.id)] = obj
+        """ New Dictionary """
+
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        self.__objects[key] = obj
 
     def save(self):
-        """serializes __objects"""
-        with open(self.__file_path, "w") as file:
-            json.dump(self.__objects, file)
+        """ Save Dictionary """
+
+        odict = FileStorage.__objects
+        data = {obj: odict[obj].to_dict() for obj in odict.keys()}
+
+        with open(self.__file_path, 'w') as file:
+            json.dump(data, file)
 
     def reload(self):
-        """deserializes the JSON file"""
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, "r") as file:
-                self.__objects = json.load(file)
+        """ Reload Dictionary """
+        try:
+
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+
+        except FileNotFoundError:
+            return
