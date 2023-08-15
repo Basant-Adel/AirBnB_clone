@@ -4,9 +4,10 @@
 import os
 import models
 import unittest
+from models.city import City
+from models.base_model import BaseModel
 from time import sleep
 from datetime import datetime
-from models.city import City
 
 
 class TestCity_instantiation(unittest.TestCase):

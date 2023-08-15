@@ -6,6 +6,7 @@ import models
 import unittest
 from time import sleep
 from models.user import User
+from models.base_model import BaseModel
 from datetime import datetime
 
 

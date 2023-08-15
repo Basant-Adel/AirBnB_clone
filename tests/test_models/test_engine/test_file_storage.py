@@ -3,8 +3,8 @@
 
 import os
 import json
-import models
 import unittest
+import models
 from models.city import City
 from models.user import User
 from datetime import datetime
