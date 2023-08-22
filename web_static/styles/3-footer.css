@@ -1,0 +1,16 @@
+footer {
+    background-color: #FFFFFF;
+    height: 60px;
+    width: 100%;
+    border-top: 1px solid #CCCCCC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    position: fixed;
+  }
+  footer p {
+    color: #000000;
+    font-size: 18px;
+    margin: 0;
+  }
